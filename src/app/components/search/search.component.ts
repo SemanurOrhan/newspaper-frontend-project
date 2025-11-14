@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NewsApiService, NewsArticle } from '../../services/news-api.service';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, NgIf, NgFor, RouterModule],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
   searchQuery: string = '';
