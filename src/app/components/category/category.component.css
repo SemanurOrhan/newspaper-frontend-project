@@ -1,53 +1,102 @@
-/* ========== Search Component ========== */
+/* ========== Category Component ========== */
 
-.search {
+.category {
   min-height: 100vh;
   background-color: #f9fafb;
   padding: 2rem 0;
 }
 
-.search__container {
+.category__container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
 }
 
-/* ========== Search Header ========== */
+/* ========== Sidebar ========== */
 
-.search__header {
-  margin-bottom: 2.5rem;
-  padding: 2rem;
+.sidebar {
   background-color: #ffffff;
   border-radius: 8px;
+  padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  text-align: center;
+  height: fit-content;
+  position: sticky;
+  top: 90px;
 }
 
-.search__title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #1f2937;
-  margin: 0 0 1rem 0;
-}
-
-.search__query {
-  color: #ef4444;
+.sidebar__title {
+  font-size: 1.25rem;
   font-weight: 700;
-}
-
-.search__stats {
-  margin-top: 0.75rem;
-}
-
-.search__count {
-  font-size: 1rem;
   color: #1f2937;
-  margin: 0 0 0.25rem 0;
-  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #ef4444;
 }
 
-.search__shown {
-  font-size: 0.875rem;
+.sidebar__nav {
+  margin: 0;
+}
+
+.category-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.category-list__item {
+  margin-bottom: 0.5rem;
+}
+
+.category-list__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  color: #4b5563;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+.category-list__link:hover {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+.category-list__link--active {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.category-list__icon {
+  flex-shrink: 0;
+}
+
+/* ========== Content Area ========== */
+
+.content {
+  min-height: 600px;
+}
+
+.content__header {
+  margin-bottom: 2rem;
+}
+
+.content__title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.content__subtitle {
+  font-size: 1.125rem;
   color: #6b7280;
   margin: 0;
 }
@@ -163,8 +212,10 @@
   margin: 0 0 1rem 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  flex-grow: 1;
 }
 
 .news-card__footer {
@@ -197,7 +248,7 @@
 
 .no-results {
   text-align: center;
-  padding: 5rem 2rem;
+  padding: 4rem 2rem;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -205,47 +256,13 @@
 
 .no-results__icon {
   color: #d1d5db;
-  margin-bottom: 1.5rem;
-}
-
-.no-results__title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin: 0 0 0.75rem 0;
+  margin-bottom: 1rem;
 }
 
 .no-results__text {
   font-size: 1.125rem;
   color: #6b7280;
-  margin: 0 0 0.5rem 0;
-}
-
-.no-results__text strong {
-  color: #ef4444;
-}
-
-.no-results__suggestion {
-  font-size: 1rem;
-  color: #9ca3af;
-  margin: 0 0 2rem 0;
-}
-
-.no-results__button {
-  display: inline-block;
-  padding: 0.875rem 2rem;
-  background-color: #ef4444;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.no-results__button:hover {
-  background-color: #dc2626;
-  transform: translateY(-2px);
+  margin: 0;
 }
 
 /* ========== Pagination ========== */
@@ -318,40 +335,86 @@
   white-space: nowrap;
 }
 
-/* ========== Responsive Design ========== */
+.content__stats {
+  flex-shrink: 0;
+  text-align: right;
+  padding: 0.5rem 1rem;
+  background-color: #f9fafb;
+  border-radius: 6px;
+  white-space: nowrap;
+}
 
-@media (min-width: 640px) {
-  .news-grid {
-    grid-template-columns: repeat(2, 1fr);
+.content__count {
+  font-size: 0.9375rem;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+  font-weight: 600;
+}
+
+.content__shown {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.content__header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.content__header-left {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .content__header-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .content__count {
+    align-self: flex-start;
   }
 }
 
-@media (min-width: 1024px) {
-  .news-grid {
-    grid-template-columns: repeat(3, 1fr);
+/* ========== Responsive Design ========== */
+
+@media (max-width: 1024px) {
+  .category__container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .sidebar {
+    position: static;
+    padding: 1.25rem;
+  }
+
+  .category-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .category-list__item {
+    margin-bottom: 0;
   }
 }
 
 @media (max-width: 768px) {
-  .search {
+  .category {
     padding: 1.5rem 0;
   }
 
-  .search__header {
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+  .content__title {
+    font-size: 1.75rem;
   }
 
-  .search__title {
-    font-size: 1.5rem;
-  }
-
-  .no-results {
-    padding: 3rem 1.5rem;
-  }
-
-  .no-results__title {
-    font-size: 1.5rem;
+  .content__subtitle {
+    font-size: 1rem;
   }
 
   .pagination__numbers {
@@ -364,35 +427,23 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+
+  .category-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-list__link {
+    font-size: 0.875rem;
+    padding: 0.75rem 0.75rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .search__header {
-    padding: 1.25rem;
+  .content__title {
+    font-size: 1.5rem;
   }
 
-  .search__title {
-    font-size: 1.25rem;
-  }
-
-  .search__count {
-    font-size: 0.875rem;
-  }
-
-  .no-results__icon {
-    width: 60px;
-    height: 60px;
-  }
-
-  .no-results__title {
-    font-size: 1.25rem;
-  }
-
-  .no-results__text {
-    font-size: 1rem;
-  }
-
-  .no-results__suggestion {
-    font-size: 0.9375rem;
+  .category-list {
+    grid-template-columns: 1fr;
   }
 }
