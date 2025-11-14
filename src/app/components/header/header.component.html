@@ -1,0 +1,49 @@
+<header class="header">
+  <div class="header__container">
+    <!-- Top Bar -->
+    <div class="header__top">
+      <div class="header__logo">
+        <a routerLink="/" class="header__logo-link">Semanur Orhan</a>
+      </div>
+      
+      <div class="header__search">
+        <form class="search-form" (submit)="onSearch($event)">
+          <input 
+            type="text" 
+            class="search-form__input" 
+            placeholder="Haberlerde ara..."
+            [(ngModel)]="searchQuery"
+            name="search"
+          />
+          <button type="submit" class="search-form__button">
+            <svg class="search-form__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="header__nav">
+      <ul class="nav-menu">
+        <li class="nav-menu__item">
+          <a routerLink="/" routerLinkActive="nav-menu__link--active" [routerLinkActiveOptions]="{exact: true}" class="nav-menu__link">
+            Ana Sayfa
+          </a>
+        </li>
+        <li class="nav-menu__item">
+          <a routerLink="/category/business" routerLinkActive="nav-menu__link--active" class="nav-menu__link">
+            Kategoriler
+          </a>
+        </li>
+        <li class="nav-menu__item">
+          <a routerLink="/about" routerLinkActive="nav-menu__link--active" class="nav-menu__link">
+            Hakkımda
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

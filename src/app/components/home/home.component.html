@@ -1,0 +1,146 @@
+<main class="home">
+  <!-- Hero Slider Section -->
+  <section class="hero-slider" *ngIf="heroArticles && heroArticles.length > 0">
+    <div class="hero-slider__container">
+      <div class="hero-slider__track">
+        <article class="hero-slide" *ngFor="let article of heroArticles; let i = index" [class.hero-slide--active]="currentSlide === i">
+          <div class="hero-slide__image-wrapper">
+            <img 
+              [src]="article.urlToImage || 'assets/placeholder.jpg'" 
+              [alt]="article.title"
+              class="hero-slide__image"
+            />
+            <div class="hero-slide__overlay"></div>
+          </div>
+          
+          <div class="hero-slide__content">
+            <div class="hero-slide__meta">
+              <span class="hero-slide__category" *ngIf="article.source">{{ article.source.name }}</span>
+              <span class="hero-slide__date" *ngIf="article.publishedAt">{{ article.publishedAt | date: 'd MMM y' }}</span>
+            </div>
+            <h2 class="hero-slide__title">{{ article.title }}</h2>
+            <p class="hero-slide__description" *ngIf="article.description">{{ article.description }}</p>
+            <a [href]="article.url" target="_blank" class="hero-slide__button">Devamını Oku</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Slider Controls -->
+      <div class="hero-slider__controls">
+        <button 
+          class="hero-slider__nav hero-slider__nav--prev" 
+          (click)="prevSlide()"
+          aria-label="Previous slide"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button 
+          class="hero-slider__nav hero-slider__nav--next" 
+          (click)="nextSlide()"
+          aria-label="Next slide"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Slider Indicators -->
+      <div class="hero-slider__indicators">
+        <button 
+          *ngFor="let article of heroArticles; let i = index"
+          class="hero-slider__indicator"
+          [class.hero-slider__indicator--active]="currentSlide === i"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+        ></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Grid Section -->
+  <section class="news-section">
+    <div class="news-section__container">
+      <div class="news-section__header">
+        <h2 class="news-section__title">Güncel Haberler</h2>
+        <div class="news-section__stats" *ngIf="articles && articles.length > 0">
+          <p class="news-section__count">Toplam {{ totalResults || articles.length }} haber bulundu</p>
+          <p class="news-section__shown">{{ articles.length }} tanesi listelendi</p>
+        </div>
+      </div>
+      
+      <div class="news-grid" *ngIf="articles && articles.length > 0">
+        <article class="news-card" *ngFor="let article of articles">
+          <div class="news-card__image-wrapper">
+            <img 
+              [src]="article.urlToImage || 'assets/placeholder.jpg'" 
+              [alt]="article.title"
+              class="news-card__image"
+            />
+          </div>
+          
+          <div class="news-card__content">
+            <div class="news-card__meta">
+              <span class="news-card__category" *ngIf="article.source">{{ article.source.name }}</span>
+              <span class="news-card__date" *ngIf="article.publishedAt">{{ article.publishedAt | date: 'd MMM y' }}</span>
+            </div>
+            
+            <h3 class="news-card__title">
+              <a [href]="article.url" target="_blank" class="news-card__link">{{ article.title }}</a>
+            </h3>
+            
+            <p class="news-card__description" *ngIf="article.description">
+              {{ article.description }}
+            </p>
+            
+            <div class="news-card__footer">
+              <span class="news-card__author" *ngIf="article.author">{{ article.author }} tarafından</span>
+              <a [href]="article.url" target="_blank" class="news-card__read-more">Devamını Oku →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- No Results -->
+      <div class="no-results" *ngIf="!articles || articles.length === 0">
+        <p class="no-results__text">Şu anda gösterilecek haber yok.</p>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" *ngIf="articles && articles.length > 0">
+        <button 
+          class="pagination__button pagination__button--prev" 
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)"
+        >
+          ‹ Önceki
+        </button>
+        
+        <div class="pagination__numbers">
+          <button 
+            *ngFor="let page of pageNumbers" 
+            class="pagination__number"
+            [class.pagination__number--active]="page === currentPage"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+        </div>
+        
+        <button 
+          class="pagination__button pagination__button--next"
+          [disabled]="currentPage === totalPages"
+          (click)="changePage(currentPage + 1)"
+        >
+          Sonraki ›
+        </button>
+        
+        <span class="pagination__info">
+          Sayfa {{ currentPage }} / {{ totalPages }}
+        </span>
+      </div>
+    </div>
+  </section>
+</main>
